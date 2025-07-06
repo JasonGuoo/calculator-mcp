@@ -1,0 +1,9 @@
+# Complex mixed expressions with nested parentheses and whitespace
+- expr: " ( 1 + 2 ) * (3 + 4) - 5^ ( 2 -1) "
+  result: "16"
+- expr: "(2+3)*(4+(5-2)^2)"
+  result: "65"
+- expr: "3+4*2/(1-5)^2^3"
+  result: "3.0001220703125"
+- expr: "(sin(pi/6)^2 + cos(pi/6)^2)"
+  result: "1"

@@ -1,0 +1,33 @@
+# Rule 1 – Numeric type coverage (≥10 valid, 5 error)
+valid:
+  - expr: "0"
+    result: "0"
+  - expr: "-0"
+    result: "0"
+  - expr: "123456789"
+    result: "123456789"
+  - expr: "-987654321"
+    result: "-987654321"
+  - expr: "3.1415926535"
+    result: "3.1415926535"
+  - expr: "-2.718281828"
+    result: "-2.718281828"
+  - expr: "6.022e23"
+    result: "602200000000000000000000"
+  - expr: "-1.6e-19"
+    result: "-0.00000000000000000016"
+  - expr: "+4.0E+2"
+    result: "400"
+  - expr: "1e0+2e0"
+    result: "3"
+errors:
+  - expr: "1e9999"   # exponent too large
+    error: "Overflow"
+  - expr: "1.2.3"
+    error: "SyntaxError"
+  - expr: "-e10"      # missing number before exponent symbol
+    error: "SyntaxError"
+  - expr: "3,14"      # comma not allowed
+    error: "SyntaxError"
+  - expr: "1e-9999"   # underflow beyond Decimal limits
+    error: "Underflow"

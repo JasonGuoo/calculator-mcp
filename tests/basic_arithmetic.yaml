@@ -1,0 +1,14 @@
+# Basic arithmetic operations
+# Each test case contains expression and expected result.
+- expr: "1+1"
+  result: "2"
+- expr: "7-5"
+  result: "2"
+- expr: "4*6"
+  result: "24"
+- expr: "18/3"
+  result: "6"
+- expr: "2^3"
+  result: "8"
+- expr: "5^0"
+  result: "1"

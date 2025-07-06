@@ -1,0 +1,13 @@
+# Numeric type coverage: integers, decimals, scientific notation, signs
+- expr: "0"
+  result: "0"
+- expr: "-5"
+  result: "-5"
+- expr: "+3.14"
+  result: "3.14"
+- expr: "6.02e3"
+  result: "6020"
+- expr: "-2.5e-2"
+  result: "-0.025"
+- expr: "1e0+2"
+  result: "3"

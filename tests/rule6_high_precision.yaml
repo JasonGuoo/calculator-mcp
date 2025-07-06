@@ -1,0 +1,33 @@
+# Rule 6 – High-precision decimal results (>=10 valid, 5 error)
+valid:
+  - expr: "1/3"
+    result: "0.3333333333333333333333333333"  # depends on precision setting; expect repeating 3s
+  - expr: "1/7"
+    result: "0.1428571428571428571428571429"
+  - expr: "pi/6"
+    result: "0.5235987755982988730771072305"
+  - expr: "sin(pi/3)"
+    result: "0.8660254037844386467637231707"
+  - expr: "cos(pi/3)"
+    result: "0.5"
+  - expr: "tan(pi/8)"
+    result: "0.4142135623730950488016887242"
+  - expr: "log(2,10)"
+    result: "0.3010299956639811952137388947"
+  - expr: "sqrt(2)"
+    result: "1.414213562373095048801688724"
+  - expr: "exp(1)"
+    result: "2.718281828459045235360287471"
+  - expr: "(1+1/10^10)^10^10"  # compound interest approximation of e
+    result: "2.718281828"  # truncated
+errors:
+  - expr: "1/10^100000"  # result underflow to zero beyond precision
+    error: "Underflow"
+  - expr: "sqrt(1e-1000000)"  # underflow domain
+    error: "Underflow"
+  - expr: "tan(pi/2)"
+    error: "DomainError"
+  - expr: "log(0,10)"
+    error: "DomainError"
+  - expr: "log(-1)"
+    error: "DomainError"

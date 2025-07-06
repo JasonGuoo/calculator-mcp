@@ -1,0 +1,11 @@
+# Operator precedence and parentheses
+- expr: "2+3*4"
+  result: "14"
+- expr: "(2+3)*4"
+  result: "20"
+- expr: "2^3^2"
+  result: "512" # right-associative pow
+- expr: "(2^3)^2"
+  result: "64"
+- expr: "3+4*2/(1-5)^2"
+  result: "3.5"

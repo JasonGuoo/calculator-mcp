@@ -1,0 +1,13 @@
+# Distributive law, identity and zero elements
+- expr: "a"  # Placeholder demonstrating variable? better not; we test numeric distributive forms.
+# Actually make numeric tests:
+- expr: "3*(4+5)"
+  result: "27"
+- expr: "3*4 + 3*5"
+  result: "27"
+- expr: "(7+0)*1"
+  result: "7"
+- expr: "0*(8-2)"
+  result: "0"
+- expr: "(5-5)^3"
+  result: "0"

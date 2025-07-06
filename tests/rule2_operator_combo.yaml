@@ -1,0 +1,33 @@
+# Rule 2 – Operator combinations (≥10 valid, 5 error)
+valid:
+  - expr: "5+4-3+2-1"
+    result: "7"
+  - expr: "8*7/14*2"
+    result: "8"
+  - expr: "2^3*4"
+    result: "32"
+  - expr: "4*2^3"
+    result: "32"
+  - expr: "(1+2)*(3-4)/(5+6)"
+    result: "-0.2727272727"
+  - expr: "-3^2"         # unary minus vs power
+    result: "-9"
+  - expr: "-(3^2)"
+    result: "-9"
+  - expr: "(+5)+(+6)"
+    result: "11"
+  - expr: "--5"          # double unary minus
+    result: "5"
+  - expr: "+-+-5"
+    result: "-5"
+errors:
+  - expr: "5*/2"
+    error: "SyntaxError"
+  - expr: "2^^3"
+    error: "SyntaxError"
+  - expr: "4+-*5"
+    error: "SyntaxError"
+  - expr: "^2"
+    error: "SyntaxError"
+  - expr: "--"
+    error: "SyntaxError"

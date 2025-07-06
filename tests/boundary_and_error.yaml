@@ -1,0 +1,11 @@
+# Boundary and error cases
+- expr: "1/0"
+  error: "DivisionByZero"
+- expr: "sqrt(-1)"
+  error: "DomainError"
+- expr: "10^(1000)"  # very large exponent
+  error: "Overflow"
+- expr: ""  # empty expression
+  error: "SyntaxError"
+- expr: "(((2+3)"  # mismatched parentheses
+  error: "SyntaxError"

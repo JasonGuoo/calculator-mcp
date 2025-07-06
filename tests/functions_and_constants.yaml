@@ -1,0 +1,11 @@
+# Built-in functions and constants
+- expr: "sqrt(16)"
+  result: "4"
+- expr: "sin(0)"
+  result: "0"
+- expr: "cos(0)"
+  result: "1"
+- expr: "tan(pi/4)"
+  result: "1"
+- expr: "log(100,10)"
+  result: "2"
