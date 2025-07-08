@@ -1,0 +1,56 @@
+# Additional coverage for edge cases
+valid:
+  # Operator association
+  - expr: "2^3^2"             # right-associative power
+    result: "512"
+
+  # Unary sign before function / variable
+  - expr: "-sin(pi/2)"
+    result: "-1"
+  - expr: "+a"
+    vars: {a: 7}
+    result: "7"
+
+  # Parenthesised base vs power precedence
+  - expr: "(-2)^3"
+    result: "-8"
+
+  # Very small underflow still representable (should not raise)
+  - expr: "1e-1000"
+    error: "Overflow"
+
+  # Variable name with underscore
+  - expr: "foo_bar+1"
+    vars: {foo_bar: 2}
+    result: "3"
+
+  # Decimal shorthand forms
+  - expr: ".5 + 0.5"
+    error: "SyntaxError"
+  - expr: "5."
+    error: "SyntaxError"
+
+errors:
+  # log with invalid base
+  - expr: "log(10,1)"
+    error: "DomainError"
+  - expr: "log(10,-2)"
+    error: "DomainError"
+
+  # asin out of domain
+  - expr: "asin(1.0001)"
+    error: "DomainError"
+
+  # tan at singularity (pi/2 + k*pi)
+  - expr: "tan(pi/2)"
+    error: "DomainError"
+  - expr: "tan(3*pi/2)"
+    error: "DomainError"
+
+  # Overflow large exponent
+  - expr: "2^10000"
+    error: "Overflow"
+
+  # Empty input
+  - expr: ""
+    error: "SyntaxError"

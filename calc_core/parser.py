@@ -5,24 +5,43 @@ from lark import Lark
 
 # Grammar mirrors the design doc
 GRAMMAR = r"""
-?start: sum
+?start: expr
+
+?expr: sum
 
 ?sum: product
     | sum "+" product   -> add
     | sum "-" product   -> sub
 
-?product: power
+?product: unary
     | product "*" power  -> mul
     | product "/" power  -> div
 
-?power: atom
-    | power "^" atom     -> pow
 
-?atom: NUMBER            -> number
-    | FUNC "(" sum ")"  -> func
-    | "(" sum ")"
+// Exponentiation (right-associative) binds tighter than unary
+?power: atom "^" power   -> pow
+      | atom
 
-%import common.SIGNED_NUMBER -> NUMBER
+// Unary plus/minus
+?unary: sign_seq power   -> signed
+      | power
+
+sign_seq: SIGN+
+SIGN: "+" | "-"
+
+?atom: NUMBER              -> number
+     | FUNC "(" args ")" -> func
+     | FUNC                -> const
+     | "(" expr ")"
+
+// Comma-separated argument list
+?args: expr ("," expr)*   -> arg_list
+
+
+
+
+// Define unsigned number token (no leading sign)
+NUMBER: /[0-9]+(\.[0-9]+)?([eE][+-]?\d+)?/
 %import common.CNAME        -> FUNC
 %import common.WS_INLINE
 %ignore WS_INLINE

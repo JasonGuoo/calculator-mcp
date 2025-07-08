@@ -1,5 +1,6 @@
 # Distributive law, identity and zero elements
-- expr: "a"  # Placeholder demonstrating variable? better not; we test numeric distributive forms.
+- expr: "a"
+  error: true  # unknown identifier should raise
 # Actually make numeric tests:
 - expr: "3*(4+5)"
   result: "27"

@@ -106,6 +106,7 @@ asin(1) + acos(0)    # 1.5708 + 1.5708
 ### 4.0 技术选型确认
 - 解析库：**lark-parser**（AST 解析）
 - 高精度：`decimal.Decimal`
+- 环境管理：**uv**（所有安装/执行命令均使用 `uv` 前缀，如 `uv pip install`, `uv run pytest`）
 - 错误类型：自定义 `CalcError`
 
 1. **安全性**：使用 `lark` 自定义文法并绝不调用 `eval()`。

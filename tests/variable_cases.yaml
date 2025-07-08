@@ -1,0 +1,25 @@
+# Tests for variable substitution, including correct and error cases
+- expr: "x"
+  vars: {x: "3"}
+  result: "3"
+- expr: "x + y"
+  vars: {x: "2", y: "5"}
+  result: "7"
+- expr: "2*x^3"
+  vars: {x: "4"}
+  result: "128"
+- expr: "sin(theta)"
+  vars: {theta: "1.5707963267948966192313217"}  # approx pi/2
+  result: "1"
+- expr: "x + z"
+  vars: {x: "1"}
+  error: true  # z undefined
+- expr: "big"
+  vars: {big: "1e1000"}
+  error: true  # overflow after substitution
+- expr: "a + b + c"
+  vars: {a: "1", b: "2", c: "3"}
+  result: "6"
+- expr: "dup"
+  vars: {dup: "abc"}
+  error: true  # invalid value not numeric

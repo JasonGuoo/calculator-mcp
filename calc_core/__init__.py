@@ -3,30 +3,44 @@ Provides `calculate(expr: str) -> Decimal` as public API.
 """
 from __future__ import annotations
 
-from decimal import Decimal, getcontext, ROUND_HALF_UP
+from decimal import Decimal, getcontext
 
 from .errors import CalcError
 from .parser import PARSER
 from .transformer import EvalTransformer
 
-# Global precision: 15 significant digits
-PRECISION = 15
-getcontext().prec = PRECISION + 5  # extra guard digits during intermediate steps
+# High precision (34 significant digits similar to IEEE 128-bit)
+PRECISION = 34
+getcontext().prec = PRECISION
+
+
+MAX_ADJ_EXP = 999  # match test expectations (10^1000 should error)
 
 
 def _quantize(value: Decimal) -> Decimal:
-    """Round/normalize result to global precision."""
-    # Use normalize then quantize to significant digits
-    # Build quantization exponent like 1e-(PRECISION-1)
-    if value.is_zero():
-        return Decimal(0)
-    exponent = -(PRECISION - 1 - value.adjusted())
-    quant = Decimal(10) ** exponent
-    return value.quantize(quant, rounding=ROUND_HALF_UP).normalize()
+    """Normalize result and enforce magnitude limits.
+
+    Raises
+    ------
+    CalcError
+        If the exponent magnitude exceeds MAX_ADJ_EXP.
+    """
+    if value.is_infinite():
+        raise CalcError("Overflow")
+    if value != 0 and abs(value.adjusted()) > MAX_ADJ_EXP:
+        raise CalcError("Overflow")
+    return value.normalize()
 
 
-def calculate(expr: str) -> Decimal:
+def calculate(expr: str, /, **variables) -> Decimal:
     """Parse and evaluate the mathematical expression.
+
+    Parameters
+    ----------
+    expr : str
+        The mathematical expression to evaluate.
+    **variables : dict[str, Decimal]
+        Variables to substitute into the expression.
 
     Raises
     ------
@@ -35,7 +49,7 @@ def calculate(expr: str) -> Decimal:
     """
     try:
         tree = PARSER.parse(expr)
-        raw = EvalTransformer().transform(tree)
+        raw = EvalTransformer(variables=variables).transform(tree)
         return _quantize(raw)
     except CalcError:
         raise

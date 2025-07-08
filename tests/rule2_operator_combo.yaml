@@ -19,7 +19,7 @@ valid:
   - expr: "--5"          # double unary minus
     result: "5"
   - expr: "+-+-5"
-    result: "-5"
+    result: "5"
 errors:
   - expr: "5*/2"
     error: "SyntaxError"
