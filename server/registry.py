@@ -103,7 +103,7 @@ registry.add_function(
                     "type": "object",
                     "description": "Optional mapping of variable names to numeric values overriding default constants.",
                     "schema": {"additionalProperties": {"type": "number"}},
-                    "optional": true
+                    "optional": True
                 }
             },
             "predefined_constants": {

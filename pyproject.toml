@@ -5,7 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "fastapi>=0.116.0",
     "lark-parser>=0.12.0",
     "pytest>=7.0",
     "pyyaml>=6.0",
+    "uvicorn>=0.35.0",
 ]
