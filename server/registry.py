@@ -94,10 +94,28 @@ registry.add_function(
     "calc.evaluate",
     {
         "description": "Evaluate a math expression with 34-digit precision.",
-        "parameters": {
-            "expr": {"type": "string"},
-            "variables": {"type": "object", "optional": True},
-        },
-        "handler": _evaluate_expr,
+            "parameters": {
+                "expr": {
+                    "type": "string",
+                    "description": "Mathematical expression supporting + - * / ^, parentheses, predefined constants and functions."
+                },
+                "variables": {
+                    "type": "object",
+                    "description": "Optional mapping of variable names to numeric values overriding default constants.",
+                    "schema": {"additionalProperties": {"type": "number"}},
+                    "optional": true
+                }
+            },
+            "predefined_constants": {
+                "pi": "3.14159265358979",
+                "e": "2.71828182845905"
+            },
+            "supported_functions": ["sin", "cos", "tan", "asin", "acos", "atan", "sqrt", "log", "exp", "abs"],
+            "examples": [
+                {"expr": "sin(pi/2)", "result": "1"},
+                {"expr": "log(100,10)", "result": "2"},
+                {"expr": "sqrt(16)+tan(pi/4)", "result": "5"}
+            ],
+            "handler": _evaluate_expr,
     },
 )
