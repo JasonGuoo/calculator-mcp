@@ -1,0 +1,42 @@
+# Additional variable substitution tests (valid and error)
+# Focus on variety: arithmetic combos, exponentiation, functions, mixed numeric formats, and error scenarios.
+
+# ----- Valid cases -----
+- expr: "x^2 + y^2"
+  vars: {x: "3", y: "4"}
+  result: "25"
+- expr: "2^n"
+  vars: {n: "10"}
+  result: "1024"
+- expr: "a*b + c/d"
+  vars: {a: "6", b: "7", c: "8", d: "4"}
+  result: "44"
+- expr: "sin(theta) + cos(theta)"
+  vars: {theta: "0.7853981633974483096156608"}  # pi/4
+  result: "1.414213562373095048801688724"
+- expr: "m*g*h"
+  vars: {m: "2.5", g: "9.8", h: "3"}
+  result: "73.5"
+- expr: "rate * principal * time / 100"
+  vars: {rate: "7.5", principal: "2000", time: "3"}
+  result: "450"
+- expr: "e^(ln_val)"
+  vars: {e: "2.718281828459045235360287471", ln_val: "1"}
+  result: "2.718281828459045235360287471"
+
+# ----- Error cases -----
+- expr: "1/z"
+  vars: {z: "0"}
+  error: true  # division by zero
+- expr: "sqrt(k)"
+  vars: {k: "-9"}
+  error: true  # domain error
+- expr: "u + v"
+  vars: {u: "1"}
+  error: true  # v undefined
+- expr: "bigvar + 1"
+  vars: {bigvar: "1e1000"}
+  error: true  # overflow after substitution
+- expr: "dup + 1"
+  vars: {dup: "abc"}
+  error: true  # non-numeric value
