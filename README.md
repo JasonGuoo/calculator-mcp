@@ -1,6 +1,7 @@
 # Calculator-MCP
 
-> A high-precision, 34-digit calculator micro-service that you can drop into any LLM workflow. Exposes both a REST API **and** an [MCP](https://github.com/cascade-ai/mcp) server so that agents can evaluate expressions securely and deterministically.
+> A high-precision, 34-digit calculator micro-service that you can drop into any LLM workflow. Exposes both a REST API **and** an [MCP](https://github.com/cascade-ai/mcp) server so that agents can evaluate expressions securely and deterministically.  
+[简体中文](./readme.zh.md) | [日本語](./readme.jp.md)
 
 ---
 ## Supported Expressions
