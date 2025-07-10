@@ -89,6 +89,7 @@ class ResourceRegistry:
 
 registry = ResourceRegistry()
 
+
 # Register default calculator function
 registry.add_function(
     "calc.evaluate",
