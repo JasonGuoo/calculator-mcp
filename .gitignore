@@ -1,3 +1,7 @@
 /calc_core/__pycache__
 /tests/__pycache__
 /server/__pycache__
+
+# Ignore IDE-specific directories
+/.serena
+/.serena
