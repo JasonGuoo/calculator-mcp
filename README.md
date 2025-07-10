@@ -4,6 +4,11 @@
 [简体中文](./readme.zh.md) | [日本語](./readme.jp.md)
 
 ---
+## Why do I need this?
+
+Large Language Models are notoriously poor at exact arithmetic—they may hallucinate numeric facts or return imprecise results. **Calculator-MCP** gives your agent a deterministic, 34-digit-precision oracle, ensuring every calculation is trustworthy and reproducible.  
+
+---
 ## Supported Expressions
 
 Calculator-MCP understands standard arithmetic along with a focused set of scientific functions and constants.
@@ -23,11 +28,6 @@ Calculator-MCP understands standard arithmetic along with a focused set of scien
 | Absolute Value | `abs(-3.5)` |
 
 All calculations return a 34-digit‐precision `result` string.
-
----
-## Why do I need this?
-
-Large Language Models are notoriously poor at exact arithmetic—they may hallucinate numeric facts or return imprecise results. **Calculator-MCP** gives your agent a deterministic, 34-digit-precision oracle, ensuring every calculation is trustworthy and reproducible.
 
 ---
 ## Features
