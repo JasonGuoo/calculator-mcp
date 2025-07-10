@@ -3,5 +3,4 @@
 /server/__pycache__
 
 # Ignore IDE-specific directories
-/.serena
-/.serena
+.serena
